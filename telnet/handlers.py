@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.core.management import get_commands, load_command_class
-# from django.core.management.base import CommandError
+from django.core.management.base import handle_default_options
 
 from telnetsrv.green import TelnetHandler, command
 
@@ -42,7 +42,13 @@ class DjangoCommandHandler(TelnetHandler):
             argv = ['telnetsrv', cmd] + params
             cmd = commands[cmd]['cmd']
             try:
-                self.write(cmd.run_from_argv(argv))
+                parser = cmd.create_parser(argv[0], argv[1])
+                options, args = parser.parse_args(argv[2:])
+                handle_default_options(options)
+                try:
+                    cmd.execute(stdout=self, *args, **options.__dict__)
+                except Exception as e:
+                    self.writeerror(str(e))
                 self.write("\n")
             except Exception, e:
                 self.writeerror(str(e))
