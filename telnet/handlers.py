@@ -36,7 +36,7 @@ class DjangoCommandHandler(TelnetHandler):
     @command(commands.keys(), hidden=True)
     def command_echo(self, params):
         keys = commands.keys()
-        cmd = "".join(self._current_line)
+        cmd = self.raw_input
         cmd = next(k for k in keys if cmd.startswith(k))
         if cmd:
             argv = ['telnetsrv', cmd] + params
