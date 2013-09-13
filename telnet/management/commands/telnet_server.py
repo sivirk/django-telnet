@@ -30,7 +30,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         addr = options.get('addr')
-        port = options.get('port')
+        port = int(options.get('port'))
 
         print 'Server started', datetime.datetime.now(), '\t on port', port
         try:
