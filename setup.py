@@ -7,7 +7,7 @@ def readme():
 
 setup(
     name="django-telnet",
-    packages=["telnet"],
+    packages=["telnet", "telnet.management", "telnet.management.commands"],
     version="0.1",
     extras_require={
         'telnetsrvlib': ['telnetsrv'],
