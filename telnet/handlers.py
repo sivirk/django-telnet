@@ -30,8 +30,8 @@ for name, app in get_commands().items():
 class DjangoCommandHandler(TelnetHandler):
     """ Django commands handler """
 
-    WELCOME = """Welcome to voip.ngn configuration server."""
-    PROMPT = '\x1b[93mngn.voip >\x1b[0m '
+    WELCOME = ""
+    PROMPT = '> '
 
     @command(commands.keys(), hidden=True)
     def command_echo(self, params):
